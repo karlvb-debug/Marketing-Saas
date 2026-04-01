@@ -12,7 +12,7 @@ export async function sendCampaign(formData: FormData) {
   const workspaceId = formData.get('workspaceId') as string
 
   if (!subject || !content || !workspaceId) {
-    return { error: 'Missing required fields' }
+    throw new Error('Missing required fields')
   }
 
   // 1. Fetch all unique email contacts in this workspace
@@ -25,7 +25,7 @@ export async function sendCampaign(formData: FormData) {
 
   if (contactError || !contacts || contacts.length === 0) {
     console.error("Contact fetch error:", contactError)
-    return { error: 'No valid contacts found in this workspace.' }
+    throw new Error('No valid contacts found in this workspace.')
   }
 
   // Extract just the email string array 
@@ -50,7 +50,7 @@ export async function sendCampaign(formData: FormData) {
 
   if (insertError) {
     console.error("Campaign insert error:", insertError)
-    return { error: 'Database failed to register campaign' }
+    throw new Error('Database failed to register campaign')
   }
 
   // 3. Dispatch Emails via Resend Server API

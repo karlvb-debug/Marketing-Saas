@@ -2,7 +2,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 
 const connectionString = 'postgresql://postgres:Grafbae1978!@db.hjlritjsccktdxlalooo.supabase.co:5432/postgres';
-const sql = fs.readFileSync('supabase/migrations/0001_initial_schema.sql', 'utf8');
+const sql = fs.readFileSync('supabase/migrations/0005_storage_buckets.sql', 'utf8');
 
 const client = new Client({
   connectionString,

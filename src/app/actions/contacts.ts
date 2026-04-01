@@ -12,7 +12,7 @@ export async function addContact(formData: FormData) {
   const workspaceId = formData.get('workspaceId') as string
 
   if (!email || !workspaceId) {
-    return { error: 'Missing required fields' }
+    throw new Error('Missing required fields')
   }
 
   const { error } = await supabase
